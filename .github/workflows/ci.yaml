@@ -1,0 +1,22 @@
+name: CI
+on: [push, pull_request]
+env:
+  START_NUMBER: 1
+  END_NUMBER: 10000
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - uses: actions-rs/toolchain@v1
+        with:
+          node-version: "16"
+      - name: Install pnpm
+        run: npm i --location=global pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build & create JS files
+        run: cargo run --release --all-features
+      - name: Run tests
+        run: pnpm test

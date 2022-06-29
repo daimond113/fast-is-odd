@@ -8,6 +8,12 @@
     "exports": "./dist/index.mjs",
     "default": "./dist/index.mjs"
   },
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "test": "jest"
   },
