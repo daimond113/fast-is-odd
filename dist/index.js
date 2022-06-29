@@ -3012,5 +3012,4 @@ function isOdd(n) {
         return false;
     }
 }
-export default isOdd
-export { isOdd }
+module.exports = isOdd
