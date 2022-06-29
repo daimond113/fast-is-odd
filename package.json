@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/daimond113/fast-is-odd/issues"
   },
-  "homepage": "https://github.com/daimond113/fast-is-odd#readme"
+  "homepage": "https://github.com/daimond113/fast-is-odd#readme",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  }
 }

@@ -1,4 +1,4 @@
-use std::fs::{self, File};
+use std::fs::{self, File, OpenOptions};
 use std::io::Write;
 
 fn main() {
@@ -23,19 +23,32 @@ function isOdd(n) {
         cjs_file
             .write(
                 format!(
-                    "else if (n === {}) {{
-            return {}            
-}}\n",
+                    "
+    else if (n === {}) {{
+        return {}            
+    }}\n",
                     i,
-                    i % 2 == 0
+                    i % 2 != 0
                 )
                 .as_bytes(),
             )
             .unwrap();
     }
-    cjs_file.write(b"}").unwrap();
+    cjs_file
+        .write(
+            b"
+    else {
+        return false;
+    }
+    ",
+        )
+        .unwrap();
+    cjs_file.write(b"}\n").unwrap();
     fs::copy("dist/index.js", "dist/index.mjs").unwrap();
-    let mut mjs_file = File::create("dist/index.mjs").unwrap();
+    let mut mjs_file = OpenOptions::new()
+        .append(true)
+        .open("dist/index.mjs")
+        .unwrap();
     mjs_file
         .write(
             b"export default isOdd
